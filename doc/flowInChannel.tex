@@ -1,0 +1,114 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{gensymb}
+\usepackage{graphicx}
+
+
+\newtheorem{thm}{Teorem}[section]
+\newtheorem{lem}[thm]{Lema}
+\newtheorem{cor}[thm]{Korolar}
+\newtheorem{defn}[thm]{Definicija}
+\newtheorem{rem}[thm]{Napomena}
+\newtheorem{prop}[thm]{Propozicija}
+\newtheorem{exa}[thm]{Primjer}
+\newtheorem{conj}[thm]{Slutnja}
+\newenvironment{proof}{\quad {Dokaz:}}{\hfill}
+\renewcommand{\contentsname}{Sadržaj}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{\fill}
+    \vspace*{0.5cm}
+    \huge\bfseries
+    Ubrizgavanje tekućine u vertikalni kanal
+    \vspace*{0.5cm}
+
+    \large Petra Brčić
+    \vspace*{\fill}
+\end{titlepage}
+
+%\tableofcontents % show correctly after 2nd %build
+%\newpage
+
+\section{Uvod}
+
+Ovaj rad je završni projekt za kolegij Znanstveno računanje 2. Cilj je implementirati neku od naučenih metoda i primijeniti ju za računanje rubnog problema ubrizgavanja tekućine u vertikalni kanal. 
+%$3^4$ hzj
+%\[ e^x  = 3 \]
+
+%Novi redak se mora eksplicitno napisati \\ ovako
+
+%\begin{thm}
+%Neka je ovo prvi teorem. Tada uistinu i jest.
+%\end{thm}
+%\begin{proof}
+%Trivijalno.
+%\end{proof}
+
+%\subsection{Potpoglavlje}
+
+%\begin{defn}
+%Definicijom definiramo.
+%\end{defn}
+
+\section{Problem}
+
+Promatramo problem ubrizgavanja tekućine u jednu stranu dugog vertikalnog kanala. Jednadžbe koje opisuju ovaj problem su Navier-Stokes i jednadžbe provođenja, no one se mogu reducirati i dobivamo sljedeći sustav
+\[ f''' - R [(f')^2 - ff''] + RA = 0 \]
+\[ h'' + Rfh' + 1 = 0 \]
+\[ \theta'' + Pf\theta' = 0 \]
+\[ f(0)=f'(0)=0, f(1)=1, f'(1)=0 \]
+\[ h(0)=h(1)=0 \]
+\[ \theta(0)=0, \theta(1)=1 \]
+
+Ovdje $f$ i $h$ su dvije potencijalne funkcije, $\theta$ je funkcija distribucije temperature i $A$ je nedefinirana konstanta. Dva su parametra poznatih vrijednosti, $R$ je Reynoldsov broj i $P$ je Pecletov broj (npr. $P=0.7R$).\\
+  
+
+
+
+%\begin{rem}
+%Svako poglavlje ima numeraciju koja počinje s njegovim rednim brojem.
+%\end{rem}
+
+\section{Rješenje problema}
+
+%\begin{exa}
+%Primjer prethodne napomene.
+%\end{exa}
+
+Primijetimo najprije da je potproblem
+\[ f''' - R [(f')^2 - ff''] + RA = 0 \]
+\[ f(0)=f'(0)=0, f(1)=1, f'(1)=0 \]
+odvojen od ostalih, pa ga možemo riješiti odvojeno. Tada su 
+\[ h'' + Rfh' + 1 = 0 \]
+\[ h(0)=h(1)=0 \]
+i
+\[ \theta'' + Pf\theta' = 0 \]
+\[ \theta(0)=0, \theta(1)=1 \]
+dva zasebna, linearna standardna problema drugog reda. Sada vidimo da smo početni problem efektivno podijelili na tri potproblema. \\
+
+Pogledajmo sada  
+\[ f''' - R [(f')^2 - ff''] + RA = 0 \]
+\[ f(0)=f'(0)=0, f(1)=1, f'(1)=0  .\]
+Imamo nelinearnu običnu diferencijalnu jednadžbu trećeg reda za $f$ s kontstantom $A$ koja je  određena s četiri dana početna uvjeta. Jedan način da jednadžbu dovedemo u standardnu formu je da ju deriviramo i dobijemo
+\[ f''''=R[f'f'' - ff''']  .\]
+Sada imamo problem zapisan u standardnom obliku 
+\[ f''''=R[f'f'' - ff'''] \]
+\[ f(0)=f'(0)=0, f(1)=1, f'(1)=0 \]
+koji više ne uključuje $A$ eksplicitno. Jedan, još generalniji, trik je da konstantu $A$ tretiramo kao još jednu zavisnu varijablu dodavanjem obične diferencijalne jednadžbe 
+\[ A'=0. \]
+Problem 
+\[ f''' - R [(f')^2 - ff''] + RA = 0 \]
+\[ f(0)=f'(0)=0, f(1)=1, f'(1)=0 \]
+\[ A'=0. \]
+je sada ponovno dan u standarnoj formi. \\
+
+Težina rješavanja nelinearnog problema je numerički ovisna, na tipičan način, o Reynoldsovom broju $R$. Za umjerenu vrijednost $R$, recimo $R=10$, prolem je jednostavan, ali postane teži povećanjem vrijednosti. Za $R=10000$ dolazi do brze promjene u nekim vrijednostima rješenja oko $x=0$. To se zove granični sloj. 
+
+\end{document}
