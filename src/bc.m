@@ -1,4 +1,4 @@
-function res = bc(ya,yb)
+function res = bc(ya,yb,A,R)
   
 %   Boundary conditions
 

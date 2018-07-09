@@ -24,7 +24,6 @@ function bvp
 
 % The solution is first sought for R = 10.
 R = 10;
-n=10;
 
 options = [];    % place holder
 
