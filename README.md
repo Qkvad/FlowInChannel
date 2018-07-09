@@ -8,9 +8,13 @@ Solution to the problem is:
 
 ![](doc/figure1.jpg?raw=true)
 
-For R =     10 -> A = 3.81
-For R =    100 -> A = 2.76
-For R =   1000 -> A = 2.55
-For R =  10000 -> A = 2.49
+The result for unknown parameter A:
+
+|       R       |       A       |
+| ------------- | ------------- |
+|       10      |     3.81      |
+|      100      |     2.76      |
+|     1000      |     2.55      |
+|    10000      |     2.49      |
 
 With the boundary layer around x = 0.
