@@ -6,7 +6,7 @@ Main part of the code that solves the problem is bvm.m
 
 Solution to the problem is:
 
-![](figure.jpg?raw=true)
+![](figure1.jpg?raw=true)
 
 For R =     10 -> A = 3.81
 For R =    100 -> A = 2.76
