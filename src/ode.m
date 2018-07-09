@@ -1,7 +1,5 @@
 function dydx = ode(x,y)
-  %dydx = ex8ode(x,y,A,R);
-%EX8ODE  ODE function for Example 8 of the BVP tutorial.
-R=100;
+   %  ODE function 
 P = 0.7*R;
 dydx = [ y(2)
          y(3)

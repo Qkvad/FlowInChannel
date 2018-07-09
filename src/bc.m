@@ -1,7 +1,7 @@
 function res = bc(ya,yb)
-  %res = ex8bc(ya,yb,A,R)
-%EX8BC  Boundary conditions for Example 8 of the BVP tutorial.
-R=100;
+  
+%   Boundary conditions
+
 res = [ya(1)
        ya(2)
        yb(1) - 1
