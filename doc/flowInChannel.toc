@@ -1,3 +1,0 @@
-\contentsline {section}{\numberline {1}Uvod}{2}
-\contentsline {section}{\numberline {2}Problem}{2}
-\contentsline {section}{\numberline {3}Rje\IeC {\v s}enje problema}{2}
