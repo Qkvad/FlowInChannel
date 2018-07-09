@@ -7,6 +7,8 @@
 \usepackage{hyperref}
 \usepackage[utf8]{inputenc}
 \newcommand{\code}[1]{\texttt{#1}}
+\usepackage{xfrac}
+\usepackage{hhline}
 
 \title{Ubrizgavanje tekućine u vertikalni kanal}
 \author{Petra Brčić}
@@ -69,15 +71,50 @@ Moj pristup numeričkom rješavanju ovog rubnog problema nešto je drugačiji. O
 Za Reynoldsov broj $R=10$ ovaj problem se može riješiti grubim pogadanjem, no kako se $R$ povećava problem postaje sve teži za rješavanje upravo zbog spomenutog graničnog sloja oko $x=0$. Rješenje za npr. $R=100$ se računa po neprekidnosti, tj. rješenje za jednu vrijednost $R$ se koristi kao pretpostavka za svaki $R=R*10$. Ovaj problem je relativno skup za \code{bvp4c} jer je profinjenija mreža potrebna za rješavanje problema graničnog sloja, takoder imamo 7 nepoznatih funkcija i jedan dodatni nepoznati parametar $A$. 
 Dakako, ovdje uzimamo u obzir da smo sve jednadžbe problema supstituirali i dobili sustav običnih diferencijalnih jednadžbi prvog reda.\\
  
-Najprije rješavamo problem za $R=10$. Moramo definirati sve što  nam je potrebno za pozivanje funkcija \code{bvp4c}.  Da bi dobili mrežu na kojoj će funkcija rješavati rubni problem koristimo funkciju \code{bvpinit} koja vraća strukturu \code{sol} gdje je \code{sol.x} vektor koji sadrži 10 ekvidistantnih točkaka na intervalu $[0,1]$, \code{sol.y} je matrica jedinica (kao početni guess) - za svaku komponentu rješenja, te nepoznati parametar $A$ se za prvo računatu vrijednosr $R$ postavlja na 1. 
- 
+Najprije rješavamo problem za $R=10$. Moramo definirati sve što  nam je potrebno za pozivanje funkcija \code{bvp4c}.  Da bi dobili početne uvjete s kojima će funkcija rješavati rubni problem koristimo funkciju \code{bvpinit} koja vraća strukturu \code{sol} gdje je \code{sol.x} vektor koji sadrži vektor od 10 ekvidistantnih točkaka na intervalu $[0,1]$, \code{sol.y} je matrica jedinica (kao početni guess) - za svaku komponentu rješenja u svakoj od točaka iz \code{sol.x}, te nepoznati parametar $A$ se za prvo računatu vrijednosr $R$ postavlja na 1. \\
+Funkcija \code{bvp4c} implementira kolokaciju s Lobatto IIIa metodom trećeg stupnja, čiji koeficijenti su dani sa
+
+\begin{center}
+\begin{tabular}{ c | c c c}
+ $0$ & $0$ & $0$ & $0$\\ 
+ $\sfrac{1}{2}$ & $\sfrac{5}{24}$ & $\sfrac{1}{3}$ & $\sfrac{-1}{24}$\\
+ $1$ & $\sfrac{1}{6}$ & $\sfrac{2}{3}$ & $\sfrac{1}{6}$\\ 
+ \hline  
+ $A_{s=3}$ & $\sfrac{1}{6}$ & $\sfrac{2}{3}$ & $\sfrac{1}{6}$   
+\end{tabular}
+\end{center}
+
+a sama metoda je dana sa
+\[ Y_{ni} = y_n + h \sum_{j=1}^{s} a_{ij} f ( t_n + c_jh, Y_{nj} ) ,   i=1,...,s\]
+\[ y_{n+1} = y_n + h \sum_{j=1}^{s} b_j f ( t_n + c_jh,Y_{nj} ) .\]
+
+Rješenje za sve veće $R$ se računa koristeći dobivene vrijednosti za manji $R$ koje su ulaz kao pretpostavke na parametre. Nakon prolaska kroz petlju za \code{i++} do $R=10000$ dobivamo rješenje dano na slici 1.
 
 \begin{figure}[!htbp]
 \begin{center}
-\includegraphics[width=8cm]{figure1.jpg}
+\includegraphics[width=8cm]{fig1.jpg}
 \end{center}
 \caption{Prikaz rješenja za različite R}
 \end{figure}
+
+Promotrimo samo na slici malo mrežu kada se približavamo $x=0$, $*$ su označenje točke, primijetimo koliko su gušće za vrijednosti blizu $x=0$ za različite vrijednosti $R$, to u upravo granični sloj (boundary layer).
+Rezultati za nepoznate vrijednosti parametra $A$ za odgovarajuće vrijednosti Reynoldsovog broja su dane u sljedećoj tablici.
+
+\begin{center}
+\begin{tabular}{|| c | c ||}
+ \hline
+  R & A\\
+ \hhline{|=|=|}
+ 10 & 3.81\\
+ \hline
+ 100 & 2.76\\
+ \hline
+ 1000 & 2.55\\
+ \hline
+ 10000 & 2.49\\
+ \hline
+\end{tabular}
+\end{center}
 
 \bibliographystyle{plain}
 \bibliography{bibliography.bib}
