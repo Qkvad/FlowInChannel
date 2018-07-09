@@ -56,5 +56,5 @@ for i=2:4
   plot(sol.x,sol.y(2,:),lines{i});
   drawnow
 end
-legend('R =     10','R =    100','R =   1000','R = 10000',1); 
+legend('R =     10','R =    100','R =   1000','R = 10000'); 
 hold off
